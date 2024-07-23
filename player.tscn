@@ -24,6 +24,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_8h55j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -35,3 +36,13 @@ texture = SubResource("GradientTexture2D_1bcih")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_sfumw")
+
+[node name="IDLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -16.0
+offset_top = -39.0
+offset_right = 46.0
+offset_bottom = -16.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "ID: 0000"

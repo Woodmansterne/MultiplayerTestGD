@@ -3,6 +3,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 @onready var sprite_2d: Sprite2D = %Sprite2D
+@onready var id_label: Label = %IDLabel
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
@@ -10,6 +11,8 @@ func _enter_tree() -> void:
 	
 func _ready() -> void:
 	sprite_2d.modulate = Color(randf(),randf(),randf(),1)
+	id_label.text = "ID: %s" % name
+	
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
