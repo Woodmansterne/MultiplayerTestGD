@@ -38,21 +38,24 @@ func _on_join_button_pressed() -> void:
 	peer.create_client(PC_IP,7000)
 	multiplayer.multiplayer_peer = peer
 	button_container.hide()
-	status_label.text = "STATUS: JOINED AS PEER"
+	status_label.text = "STATUS: JOINING..."
 
 
 func _on_join_button_local_pressed() -> void:
 	peer.create_client("localhost",7000)
 	multiplayer.multiplayer_peer = peer
 	button_container.hide()
-	status_label.text = "STATUS: JOINED LOCALLY AS PEER"
+	status_label.text = "STATUS: JOINING LOCALLY..."
 
 
 func _on_player_disconnected():
 	print("Player disconnected!")
 func _on_connected_ok():
+	status_label.text = "STATUS: JOINED!"
 	print("Connected OK!")
 func _on_connected_fail():
+	status_label.text = "STATUS: CONNECTION FAILED(???) :("
 	print("Connection failed!")
 func _on_server_disconnected():
+	status_label.text = "STATUS: SERVER IS DEAD :("
 	print("Server disconnected!")
