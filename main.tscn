@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://yu8wmoekdpwq"]
+[gd_scene load_steps=5 format=3 uid="uid://yu8wmoekdpwq"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_aij80"]
 [ext_resource type="PackedScene" uid="uid://cbqmgudttkowy" path="res://player.tscn" id="1_fdlih"]
 [ext_resource type="Theme" uid="uid://dblq3aeoywv06" path="res://new_theme.tres" id="3_f5s8r"]
+[ext_resource type="PackedScene" uid="uid://c5ffufpvcaof3" path="res://tiles.tscn" id="4_ciwhs"]
 
 [node name="MultiplayerTest" type="Node2D"]
 script = ExtResource("1_aij80")
@@ -13,22 +14,30 @@ _spawnable_scenes = PackedStringArray("res://player.tscn")
 spawn_path = NodePath("..")
 
 [node name="Control" type="Control" parent="."]
+z_index = 5
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_right = 960.0
+offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ButtonContainer" type="VBoxContainer" parent="Control"]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 51.0
-offset_top = 123.0
-offset_right = 618.0
-offset_bottom = 419.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -143.5
+offset_top = -83.5
+offset_right = 143.5
+offset_bottom = 83.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HostButton" type="Button" parent="Control/ButtonContainer"]
 layout_mode = 2
@@ -54,6 +63,8 @@ offset_bottom = 23.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "STATUS: NOT CONNECTED"
+
+[node name="World" parent="." instance=ExtResource("4_ciwhs")]
 
 [connection signal="pressed" from="Control/ButtonContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Control/ButtonContainer/JoinButton" to="." method="_on_join_button_pressed"]
