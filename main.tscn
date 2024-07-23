@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://yu8wmoekdpwq"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_aij80"]
+[ext_resource type="PackedScene" uid="uid://cbqmgudttkowy" path="res://player.tscn" id="1_fdlih"]
+[ext_resource type="Theme" uid="uid://dblq3aeoywv06" path="res://new_theme.tres" id="3_f5s8r"]
+
+[node name="MultiplayerTest" type="Node2D"]
+script = ExtResource("1_aij80")
+player_scene = ExtResource("1_fdlih")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+offset_left = 51.0
+offset_top = 123.0
+offset_right = 102.0
+offset_bottom = 189.0
+
+[node name="HostButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme = ExtResource("3_f5s8r")
+text = "HOST GAME"
+
+[node name="JoinButton" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme = ExtResource("3_f5s8r")
+text = "JOIN GAME"
+
+[node name="JoinButtonLocal" type="Button" parent="ButtonContainer"]
+layout_mode = 2
+theme = ExtResource("3_f5s8r")
+text = "JOIN LOCAL GAME"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://player.tscn")
+spawn_path = NodePath("..")
+
+[node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+text = "STATUS: NOT CONNECTED"
+
+[connection signal="pressed" from="ButtonContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="ButtonContainer/JoinButtonLocal" to="." method="_on_join_button_local_pressed"]
