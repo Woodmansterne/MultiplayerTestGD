@@ -1,16 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://yu8wmoekdpwq"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_aij80"]
-[ext_resource type="PackedScene" uid="uid://cbqmgudttkowy" path="res://player.tscn" id="1_fdlih"]
+[ext_resource type="PackedScene" uid="uid://cbqmgudttkowy" path="res://scenes/player.tscn" id="1_fdlih"]
 [ext_resource type="Theme" uid="uid://dblq3aeoywv06" path="res://new_theme.tres" id="3_f5s8r"]
-[ext_resource type="PackedScene" uid="uid://c5ffufpvcaof3" path="res://tiles.tscn" id="4_ciwhs"]
+[ext_resource type="PackedScene" uid="uid://c5ffufpvcaof3" path="res://scenes/tiles.tscn" id="4_ciwhs"]
 
 [node name="MultiplayerTest" type="Node2D"]
 script = ExtResource("1_aij80")
 player_scene = ExtResource("1_fdlih")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://player.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
 spawn_path = NodePath("..")
 
 [node name="Control" type="Control" parent="."]
