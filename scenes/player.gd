@@ -1,7 +1,9 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const ACCELERATION = 0.25
+const DECELERATION = 0.1
+
 @onready var sprite_2d: Sprite2D = %Sprite2D
 @onready var id_label: Label = %IDLabel
 @onready var camera_2d: Camera2D = %Camera2D
@@ -25,10 +27,11 @@ func _ready() -> void:
 func update_movement():
 	var direction := Input.get_vector("move_left","move_right","move_up","move_down").normalized()
 	if direction:
-		velocity = direction * SPEED
+		velocity = lerp(velocity,direction * SPEED,ACCELERATION)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity = lerp(velocity,Vector2.ZERO,DECELERATION)
+		#velocity.x = move_toward(velocity.x, 0, DECELERATION)
+		#velocity.y = move_toward(velocity.y, 0, DECELERATION)
 
 func update_mouse_look():
 	if get_window().has_focus():
