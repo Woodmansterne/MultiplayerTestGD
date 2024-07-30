@@ -16,7 +16,8 @@ func _ready():
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
-
+func _process(delta: float) -> void:
+	status_label.text = Globals.GameStatus
 
 func _on_host_button_pressed() -> void:
 	peer.create_server(7000,32)
@@ -24,7 +25,8 @@ func _on_host_button_pressed() -> void:
 	multiplayer.peer_connected.connect(_add_player)
 	_add_player()
 	button_container.hide()
-	status_label.text = "STATUS: HOSTING GAME"
+	Globals.GameStatus = "STATUS: HOSTING GAME"
+	status_label.hide()
 	#player_connected.emit(1,"HOST")
 
 func _add_player(id = 1):
@@ -38,24 +40,26 @@ func _on_join_button_pressed() -> void:
 	peer.create_client(PC_IP,7000)
 	multiplayer.multiplayer_peer = peer
 	button_container.hide()
-	status_label.text = "STATUS: JOINING..."
+	Globals.GameStatus = "STATUS: JOINING..."
+	status_label.hide()
 
 
 func _on_join_button_local_pressed() -> void:
 	peer.create_client("localhost",7000)
 	multiplayer.multiplayer_peer = peer
 	button_container.hide()
-	status_label.text = "STATUS: JOINING LOCALLY..."
+	Globals.GameStatus = "STATUS: JOINING LOCALLY..."
+	status_label.hide()
 
 
 func _on_player_disconnected():
 	print("Player disconnected!")
 func _on_connected_ok():
-	status_label.text = "STATUS: JOINED!"
+	Globals.GameStatus = "STATUS: JOINED!"
 	print("Connected OK!")
 func _on_connected_fail():
-	status_label.text = "STATUS: CONNECTION FAILED(???) :("
+	Globals.GameStatus = "STATUS: CONNECTION FAILED(???) :("
 	print("Connection failed!")
 func _on_server_disconnected():
-	status_label.text = "STATUS: SERVER IS DEAD :("
+	Globals.GameStatus = "STATUS: SERVER IS DEAD :("
 	print("Server disconnected!")

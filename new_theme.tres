@@ -1,4 +1,7 @@
-[gd_resource type="Theme" format=3 uid="uid://dblq3aeoywv06"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dblq3aeoywv06"]
+
+[ext_resource type="FontFile" uid="uid://dtsam2lgj3seb" path="res://fonts/NESCyrillic.ttf" id="1_xhpi3"]
 
 [resource]
+default_font = ExtResource("1_xhpi3")
 default_font_size = 32

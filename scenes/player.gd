@@ -6,6 +6,9 @@ const JUMP_VELOCITY = -400.0
 @onready var id_label: Label = %IDLabel
 @onready var camera_2d: Camera2D = %Camera2D
 
+@onready var status_label: Label = %StatusLabel
+@onready var game_hud: Control = %GameHUD
+
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 	position = Vector2(randi_range(32,512),randi_range(32,256))
@@ -17,14 +20,40 @@ func _ready() -> void:
 		camera_2d.enabled = true
 		camera_2d.make_current()
 	
+	
+##Controls and shit
+func update_movement():
+	var direction := Input.get_vector("move_left","move_right","move_up","move_down").normalized()
+	if direction:
+		velocity = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.y = move_toward(velocity.y, 0, SPEED)
 
+func update_mouse_look():
+	if get_window().has_focus():
+		look_at(get_global_mouse_position())
+	
+func update_camera():
+	if get_window().has_focus():
+		var mousePos = get_global_mouse_position()
+		var dist = clamp((position-mousePos).length() / 2.0,8,192)
+		var newAngle = int(rad_to_deg(rotation)) % 360 ##Modulo doesnt work with floats??????
+		camera_2d.position = Vector2(
+			position.x + dist * cos(deg_to_rad(newAngle)),
+			position.y + dist * sin(deg_to_rad(newAngle))
+		)
+	
+func _process(delta: float) -> void:
+	if is_multiplayer_authority():
+		status_label.text = Globals.GameStatus
+	else:
+		game_hud.visible = false
+	
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
-		var direction := Input.get_vector("move_left","move_right","move_up","move_down").normalized()
-		if direction:
-			velocity = direction * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.y = move_toward(velocity.y, 0, SPEED)
+		update_movement()
+		update_mouse_look()
+		update_camera()
 
 	move_and_slide()
