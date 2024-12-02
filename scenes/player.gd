@@ -30,8 +30,6 @@ func update_movement():
 		velocity = lerp(velocity,direction * SPEED,ACCELERATION)
 	else:
 		velocity = lerp(velocity,Vector2.ZERO,DECELERATION)
-		#velocity.x = move_toward(velocity.x, 0, DECELERATION)
-		#velocity.y = move_toward(velocity.y, 0, DECELERATION)
 
 func update_mouse_look():
 	if get_window().has_focus():

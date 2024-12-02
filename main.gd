@@ -5,6 +5,7 @@ var peer = ENetMultiplayerPeer.new()
 @onready var button_container: VBoxContainer = %ButtonContainer
 @onready var status_label: Label = %StatusLabel
 
+
 ##SERVER SIGNALS
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
@@ -63,3 +64,5 @@ func _on_connected_fail():
 func _on_server_disconnected():
 	Globals.GameStatus = "STATUS: SERVER IS DEAD :("
 	print("Server disconnected!")
+	button_container.show()
+	status_label.show()
